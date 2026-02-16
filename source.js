@@ -1,0 +1,20 @@
+export const source = [
+    {
+        id:0,
+        value:"踢",
+        animation:"../LearnWord_ver0/anime/kickAnime.mp4",
+        sound:""
+    },
+    {
+        id:1,
+        value:"足",
+        animation:"",
+        sound:""
+    },
+    {
+        id:2,
+        value:"球",
+        animation:"",
+        sound:""
+    }
+]
