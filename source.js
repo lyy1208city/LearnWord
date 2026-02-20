@@ -2,8 +2,8 @@ export const source = [
     {
         id:0,
         value:"踢",
-        animation:"../LearnWord_ver0/anime/kickAnime.mp4",
-        sound:""
+        animation:"../anime/kickAnime.mp4",
+        sound:"../sound/kickSound.mp3"
     },
     {
         id:1,
