@@ -2,8 +2,8 @@ export const source = [
     {
         id:0,
         value:"踢",
-        animation:"anime/kickAnime.mp4",
-        sound:"sound/kickSound.mp3"
+        animation:"/anime/kickAnime.mp4",
+        sound:"/sound/kickSound.mp3"
     },
     {
         id:1,
