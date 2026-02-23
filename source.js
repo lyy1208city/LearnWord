@@ -16,5 +16,35 @@ export const source = [
         value:"球",
         animation:"./anime/ballAnime.mp4",
         sound:"./sound/ballSound.mp3"
+    }, 
+    {
+        id:3,
+        value:"踏",
+        animation:"./anime/rideAnime.mp4",
+        sound:"./sound/rideSound.mp3"
+    },
+    {
+        id:4,
+        value:"單",
+        animation:"./anime/singleAnime.mp4",
+        sound:"./sound/singleSound.mp3"
+    },
+    {
+        id:5,
+        value:"車",
+        animation:"./anime/carAnime.mp4",
+        sound:"./sound/carSound.mp3"
+    },
+        {
+        id:6,
+        value:"游",
+        animation:"./anime/swim1Anime.mp4",
+        sound:"./sound/swim1Sound.mp3"
+    },
+    {
+        id:7,
+        value:"泳",
+        animation:"./anime/swim2Anime.mp4",
+        sound:"./sound/swim2Sound.mp3"
     }
 ]
