@@ -8,13 +8,13 @@ export const source = [
     {
         id:1,
         value:"足",
-        animation:"",
-        sound:""
+        animation:"./anime/footAnime.mp4",
+        sound:"./sound/footSound.mp3"
     },
     {
         id:2,
         value:"球",
-        animation:"",
-        sound:""
+        animation:"./anime/ballAnime.mp4",
+        sound:"./sound/ballSound.mp3"
     }
 ]
