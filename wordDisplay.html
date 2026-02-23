@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>生字</title>
+    <title>認字網站</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <script type="module">
     import './wordDisplay.js'
 </script>
 <body>
+    <header class="topbar page">
+        <div style="display:flex;align-items:center;gap:8px">
+            <button id="homePage-button" class="play-btn" onclick="window.location.href='index.html'">返回首頁</button>
+        </div>
+    </header>
+
     <div class="content-wrapper">
         <div id="displayAnime-container" class="media-box"></div>
         <div id="displaySound-container" style="width:100%;display:flex;justify-content:center;margin-top:8px"></div>
-        <div style="display:flex;justify-content:center;margin-top:16px">
-            <button id = "homePage-button" class="play-btn" onclick = "window.location.href = 'index.html'">返回首頁</button>
-        </div>
     </div>
 </body>
 </html>

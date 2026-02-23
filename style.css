@@ -1,84 +1,239 @@
-:root{
-	--accent:#2b7cff;
-	--muted:#666;
-	--bg:#f7f9fc;
-}
-*{box-sizing:border-box}
-body{
-	margin:0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
-	background:var(--bg);
-	color:#111;
-}
-.topbar{
-	width:100%;
-	padding:10px 16px;
-	background:linear-gradient(90deg, #fff, #f1f6ff);
-	display:flex;
-	justify-content:center;
-	border-bottom:1px solid #e6eefc;
-}
-.mode-switch{display:flex;gap:8px}
-.mode-btn{
-	padding:8px 12px;
-	border-radius:8px;
-	border:1px solid #d0dffb;
-	background:white;
-	cursor:pointer;
-	font-weight:600;
-}
-.mode-btn.active{
-	background:var(--accent);
-	color:white;
-	box-shadow:0 4px 12px rgba(43,124,255,0.18);
-}
-.word-grid{
-	display:flex;
-	gap:12px;
-	flex-wrap:wrap;
-	justify-content:center;
-	padding:20px;
-}
-.word-tile{
-	display:inline-flex;
-	align-items:center;
-	justify-content:center;
-	text-align:center;
-	width:140px;
-	height:140px;
-	border-radius:12px;
-	background:linear-gradient(180deg,#fff,#f3f8ff);
-	border:1px solid #dfeeff;
-	font-size:36px;
-	cursor:pointer;
-	transition:transform .12s ease, box-shadow .12s ease;
-	user-select:none;
-}
-.word-tile:active{transform:scale(.98)}
-.word-tile:hover{box-shadow:0 8px 20px rgba(43,124,255,0.08)}
+:root {
+  --accent:      #3b82f6;        /* brighter, friendlier blue */
+  --accent-dark: #2563eb;
+  --accent-glow: rgba(59, 130, 246, 0.18);
 
-/* layout variants */
-.layout-mobile .word-grid{gap:10px;padding:16px}
-.layout-mobile .word-tile{width:120px;height:120px;font-size:28px;border-radius:10px}
-.layout-desktop .word-tile{width:160px;height:160px;font-size:40px}
+  --bg:          #f8fafc;
+  --surface:     #ffffff;
+  --surface-2:   #f1f5f9;
 
-/* wordDisplay page styles */
-.content-wrapper{max-width:880px;margin:28px auto;padding:0 16px}
-.media-box{background:#fff;border:1px solid #e6eefc;border-radius:10px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px}
-.media-box video{width:100%;max-width:720px;border-radius:8px;background:var(--muted)}
-.play-btn{appearance:none;border:0;padding:10px 18px;border-radius:8px;background:var(--accent);color:#fff;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(43,124,255,0.12)}
-.play-btn:active{transform:translateY(1px)}
-.play-btn.secondary{background:#4a5568}
+  --text:        #0f172a;
+  --text-muted:  #64748b;
+  --border:      #e2e8f0;
 
-/* layout for sound container and small controls */
-#displaySound-container{display:flex;justify-content:center;gap:10px;margin-top:10px}
-#displaySound-container .play-btn{padding:8px 14px;font-size:14px}
-#homePage-button.play-btn{padding:8px 14px}
+  --radius:      16px;
+  --shadow-sm:   0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md:   0 8px 24px rgba(0,0,0,0.10);
+  --transition:  all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-/* hidden native controls container for accessibility */
-.visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-/* small screens */
-@media (max-width:520px){
-	.word-grid{gap:10px}
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+               'Segoe UI', Roboto, 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  line-height: 1.5;
+}
+
+/* ── Top bar ─────────────────────────────────────────────── */
+.topbar {
+  width: 100%;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topbar.page {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.topbar h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  letter-spacing: -0.02em;
+}
+
+/* ── Word grid & tiles (main improvement area) ───────────── */
+.word-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  padding: 24px 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.word-tile {
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.word-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(59,130,246,0.07) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.word-tile:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: var(--shadow-md);
+}
+
+.word-tile:hover::before {
+  opacity: 1;
+}
+
+.word-tile:active {
+  transform: translateY(-2px) scale(0.98);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .word-grid {
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .word-tile {
+    font-size: 2.6rem;
+    border-radius: 14px;
+  }
+}
+
+/* ── wordDisplay page ────────────────────────────────────── */
+.content-wrapper {
+  max-width: 920px;
+  margin: 32px auto;
+  padding: 0 16px;
+}
+
+.media-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.media-box video {
+  width: 100%;
+  max-width: 760px;
+  border-radius: 12px;
+  background: #0f172a;
+  aspect-ratio: auto;
+  /* keep the full frame visible without cropping */
+  object-fit: contain;
+  max-height: 60vh;
+}
+
+.media-box::before{
+  /* subtle centered frame background to avoid large dark bars */
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Play buttons */
+.play-btn {
+  appearance: none;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: white;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 20px var(--accent-glow);
+  transition: var(--transition);
+}
+
+.play-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px var(--accent-glow);
+}
+
+.play-btn:active {
+  transform: translateY(0);
+}
+
+.play-btn.secondary {
+  background: #475569;
+  box-shadow: 0 6px 20px rgba(71,85,105,0.2);
+}
+
+/* Sound controls row */
+#displaySound-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+#displaySound-container .play-btn {
+  padding: 10px 20px;
+  font-size: 0.98rem;
+}
+
+/* Home button in topbar */
+#homePage-button.play-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+
+/* Accessibility helper */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0,0,0,0) !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* Extra polish — subtle background texture (optional) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 10% 20%, rgba(59,130,246,0.04) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: -1;
 }
