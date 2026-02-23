@@ -2,6 +2,7 @@
 <html lang="zh-hk">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>生字</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -9,8 +10,12 @@
     import './wordDisplay.js'
 </script>
 <body>
-    <div id="displayAnime-container"></div>
-    <div id="displaySound-container"></div>
-    <button id = "homePage-button" onclick = "window.location.href = 'index.html'">Back To Home page</button>
+    <div class="content-wrapper">
+        <div id="displayAnime-container" class="media-box"></div>
+        <div id="displaySound-container" style="width:100%;display:flex;justify-content:center;margin-top:8px"></div>
+        <div style="display:flex;justify-content:center;margin-top:16px">
+            <button id = "homePage-button" class="play-btn" onclick = "window.location.href = 'index.html'">返回首頁</button>
+        </div>
+    </div>
 </body>
 </html>

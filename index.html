@@ -2,6 +2,7 @@
 <html lang="zh-hk">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>生字</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -9,6 +10,15 @@
     import './index.js'
 </script>
 <body>
-    <div id="displayButton-container"></div>
+    <header class="topbar">
+        <div class="mode-switch">
+            <button id="mobile-mode" class="mode-btn">手機版</button>
+            <button id="desktop-mode" class="mode-btn">網頁版</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="displayButton-container" class="word-grid"></div>
+    </main>
 </body>
 </html>
